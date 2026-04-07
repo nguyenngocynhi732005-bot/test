@@ -17,6 +17,20 @@
          padding: 20px;
      }
 
+     .navbar {
+        background-color: #131212;
+
+        font-weight: bold;
+    }
+
+    .nav-item a {
+        color: #fff !important;
+    }
+
+    .navbar-nav {
+            margin: 0 auto;
+        }
+
      .search-bar {
          max-width: 900px;
          margin: 0 auto;
