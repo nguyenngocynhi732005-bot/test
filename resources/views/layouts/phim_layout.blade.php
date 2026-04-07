@@ -1,91 +1,106 @@
- <!DOCTYPE html>
- <html>
+<!DOCTYPE html>
+<html>
 
- <head>
-     <title>@yield('title')</title>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
- </head>
+<head>
+    <title>@yield('title')</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
 
- <style>
-     .search-box-wrapper {
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         width: 100%;
-         text-align: center;
-         padding: 20px;
-     }
+<style>
+    .search-box-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+    }
 
-     .search-bar {
-         max-width: 900px;
-         margin: 0 auto;
-     }
+    /* Sidebar nền đen chữ trắng */
+    .col-3 {
+        background-color: #131212 !important;
+        min-height: 100vh;
+        padding-top: 20px;
+    }
 
-     .custom-search-input {
-         border-radius: 50px 0 0 50px;
-         /* Bo tròn đều bên trái */
-         padding-left: 25px;
-         border: none;
-         height: 45px;
-     }
+    .navbar-nav {
+        width: 100%;
+    }
 
-     .custom-search-btn {
-         border-radius: 0 50px 50px 0;
+    .navbar-nav .nav-link {
+        color: white !important;
+    }
 
-         padding: 0 30px;
-         height: 45px;
-         color: white;
-         font-weight: bold;
-         background: linear-gradient(to right, #1ed5a9, #01b4e4);
-         border: none;
-     }
- </style>
+    .navbar-nav .nav-item.active .nav-link {
+        background-color: #131212 !important;
+        color: white !important;
+        font-weight: bold;
+    }
 
+    .navbar-nav .nav-link:hover {
+        color: #1ed5a9 !important;
+        text-decoration: none;
+    }
 
- <body>
-     <header style="position: relative; width: 1000px; margin: 0 auto;">
-         <img src="{{asset('images/banner.jpg')}}" width="1000px" style="display: block;">
+    /* Flex container để banner + sidebar + content thẳng hàng */
+    .main-flex-container {
+        display: flex;
+        flex-direction: column; /* banner đứng trên */
+        align-items: center;
+    }
 
-         <div class="search-box-wrapper" style="color: white;">
-             <h2>Welcome.</h2>
-             <p>Millions of movies, TV shows and people to discover. Explore now.</p>
+    .content-flex-row {
+        display: flex;
+        width: 1000px; /* chiều rộng cố định */
+    }
 
-             <div class="input-group search-bar">
-                 <input type="text" class="form-control custom-search-input"
-                     placeholder="Nhập tên phim...">
-                 <div class="input-group-append">
-                     <button class="btn custom-search-btn" type="button">Tìm kiếm</button>
-                 </div>
-             </div>
-         </div>
-     </header>
+    .col-9 {
+        padding-left: 20px;
+    }
 
-     <main style="width:1000px; margin:2px auto;">
-         <div class='row'>
-             <div class='col-3 pr-0'>
-                 <nav class="navbar navbar-light">
-                     <ul class="navbar-nav">
-                         <li class="nav-item active">
-                             <a class="nav-link" href="{{url('phim')}}">Trang chủ</a>
-                         </li>
+    header img {
+        display: block;
+    }
+</style>
 
-                         @foreach($genres as $gn)
-                         <li class="nav-item">
-                             {{-- Tự động tạo link dựa trên id và hiển thị tên tiếng Việt --}}
-                             <a class="nav-link" href="{{url('phim/theloai/'.$gn->id)}}">
-                                 {{$gn->genre_name_vn}}
-                             </a>
-                         </li>
-                         @endforeach
-                     </ul>
-                 </nav>
-             </div>
-             <div class='col-9'>
-                 @yield('content')
-             </div>
-         </div>
-     </main>
- </body>
+<body>
+    <div class="main-flex-container">
+        <!-- Banner -->
+        <header style="width:1000px;">
+            <img src="{{asset('images/banner.jpg')}}" width="1000px" style="display: block;">
 
- </html>
+            <!-- Thông tin banner, bỏ tìm kiếm -->
+            <div class="search-box-wrapper" style="color: white;">
+                <h2>Welcome.</h2>
+                <p>Millions of movies, TV shows and people to discover. Explore now.</p>
+            </div>
+        </header>
+
+        <!-- Nội dung chính: sidebar + content -->
+        <main class="content-flex-row">
+            <div class="col-3 pr-0">
+                <nav class="navbar navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{url('phim')}}">Trang chủ</a>
+                        </li>
+
+                        @foreach($genres as $gn)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('phim/theloai/'.$gn->id)}}">
+                                {{$gn->genre_name_vn}}
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-9">
+                @yield('content')
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
