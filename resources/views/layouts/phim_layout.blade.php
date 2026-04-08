@@ -63,12 +63,38 @@
         text-decoration: none;
     }
 
+<<<<<<< HEAD
     /* Flex container để banner + sidebar + content thẳng hàng */
     .main-flex-container {
         display: flex;
         flex-direction: column; /* banner đứng trên */
         align-items: center;
     }
+=======
+                         @foreach($genres as $gn)
+                         <li class="nav-item">
+                             {{-- Tự động tạo link dựa trên id và hiển thị tên tiếng Việt --}}
+                             <a class="nav-link" href="{{url('phim/theloai/'.$gn->id)}}">
+                                 {{$gn->genre_name_vn}}
+                             </a>
+                         </li>
+                         @endforeach
+                     </ul>
+                 </nav>
+             </div>
+             <div class='col-9'>
+                 @yield('content')
+             </div>
+         </div>
+     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+ </body>
+>>>>>>> 53018c37bd3d93addef5358bfc654e4720e818ec
 
     .content-flex-row {
         display: flex;
