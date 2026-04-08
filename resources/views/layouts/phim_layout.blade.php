@@ -62,11 +62,24 @@
         color: white !important;
     }
 
+<<<<<<< HEAD
     .navbar-nav .nav-item.active .nav-link {
         background-color: #131212 !important;
         color: white !important;
         font-weight: bold;
     }
+=======
+             <form action="{{ url('/timkiem') }}" method="POST" class="input-group search-bar">
+                 @csrf
+                 <input type="text" name="keyword" class="form-control custom-search-input"
+                     placeholder="Nhập tên phim...">
+                 <div class="input-group-append">
+                     <button class="btn custom-search-btn" type="submit">Tìm kiếm</button>
+                 </div>
+             </form>
+         </div>
+     </header>
+>>>>>>> dfac9469f6b3f063f314d94d7d83ab3b1b8fbd5d
 
     .navbar-nav .nav-link:hover {
         color: #1ed5a9 !important;
