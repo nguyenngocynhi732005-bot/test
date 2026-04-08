@@ -5,7 +5,7 @@
     <div style="width:200px; margin:10px; border:1px solid #ccc; padding:5px;">
 
         <a href="{{ route('movie.show', ['id' => $movie->id]) }}">
-            <img src="{{ $movie->image_link }}" width="100%">
+            <img src="{{ asset($movie->image_link) }}" width="100%" alt="{{ $movie->movie_name_vn }}">
             <h3>{{ $movie->movie_name_vn }}</h3>
             <p>{{ $movie->release_date }}</p>
         </a>

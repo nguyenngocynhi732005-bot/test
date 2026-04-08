@@ -1,16 +1,11 @@
 <?php
 
 use App\Http\Controllers\MovieController;
-
 use App\Http\Controllers\ViduLayoutController;
 use Illuminate\Support\Facades\Route;
-
-<<<<<<< HEAD
 use App\Http\Controllers\MovieAddController;
-
-use App\Http\Controllers\MovieController;
-use App\Http\Controllers\ViduLayoutController;
 use App\Http\Controllers\MovieManagementController;
+use App\Http\Controllers\MovieController3;
 
 
 Route::get('/', [App\Http\Controllers\MovieController::class, 'index']);
@@ -33,14 +28,7 @@ Route::get('/quanlyphim', [MovieManagementController::class, 'index'])->name('mo
 Route::get('/quanlyphim/{id}', [MovieManagementController::class, 'show'])->name('movie.show');
 Route::delete('/quanlyphim/{id}', [MovieManagementController::class, 'destroy'])->name('movie.destroy');
 
-=======
-Route::get('/', [MovieController::class, 'index']);
-Route::get('/phim', [ViduLayoutController::class, 'phim']);
-Route::get('/phim/theloai/{id}', [ViduLayoutController::class, 'theloai']);
 
 // PhuongAnh
-use App\Http\Controllers\MovieController3;
-
-
 Route::post('/timkiem', [MovieController3::class, 'search']);
->>>>>>> dfac9469f6b3f063f314d94d7d83ab3b1b8fbd5d
+

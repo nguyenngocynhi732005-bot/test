@@ -14,7 +14,8 @@ class ViduLayoutController extends Controller
         $genres = DB::table('genre')->get();
 
         // ⭐ Chỉ sửa chỗ này: dùng Movie::query() để lấy tất cả cột
-        $movies = Movie::where('popularity', '>', 450)
+        $movies = Movie::where('status', 1)
+                       ->where('popularity', '>', 450)
                        ->where('vote_average', '>', 7)
                        ->orderBy('release_date', 'desc')
                        ->limit(12)
@@ -27,7 +28,8 @@ class ViduLayoutController extends Controller
     {
         $genres = DB::table('genre')->get();
 
-        $movies = Movie::where('popularity', '>', 450)
+        $movies = Movie::where('status', 1)
+                       ->where('popularity', '>', 450)
                        ->where('vote_average', '>', 7)
                        ->orderBy('release_date', 'desc')
                        ->limit(12)
@@ -40,7 +42,8 @@ class ViduLayoutController extends Controller
     {
         $genres = DB::table('genre')->get();
 
-        $movies = Movie::whereHas('genres', function($q) use($id) {
+        $movies = Movie::where('status', 1)
+                       ->whereHas('genres', function($q) use($id) {
             $q->where('genre.id', $id);
         })
         ->orderBy('release_date', 'desc')

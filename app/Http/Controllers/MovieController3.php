@@ -12,8 +12,8 @@ class MovieController3 extends Controller
         $keyword = trim((string) $request->input('keyword', ''));
 
         $movies = DB::select(
-            "select * from movie where movie_name_vn like ?",
-            ["%" . $keyword . "%"]
+            "select * from movie where status = 1 and (movie_name_vn like ? or movie_name like ? or original_name like ?)",
+            ["%" . $keyword . "%", "%" . $keyword . "%", "%" . $keyword . "%"]
         );
 
         $genres = DB::select("select * from genre");

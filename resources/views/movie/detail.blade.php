@@ -9,7 +9,7 @@
 <!-- Phần chi tiết phim -->
 <div style="display:flex; margin-top:20px;">
     <!-- Ảnh phim -->
-    <img src="{{ $movie->image_link }}" width="300px">
+    <img src="{{ asset($movie->image_link) }}" width="300px" alt="{{ $movie->movie_name_vn }}">
 
     <div style="margin-left:20px;">
         <p><b>Ngày phát hành:</b> {{ $movie->release_date }}</p>

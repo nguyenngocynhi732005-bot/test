@@ -36,26 +36,36 @@ class MovieAddController extends Controller
             'image'         => 'Ảnh đại diện',
         ]);
 
-        // 2. Xử lý lưu ảnh
+        // 2. Xử lý lưu ảnh vào public/images
         $imageName = null;
+        $imagePath = null;
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('public');
-            $imageName = basename($path);
+            $file = $request->file('image');
+            $imageName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images'), $imageName);
+            $imagePath = 'images/' . $imageName;
         }
 
         // 3. Chèn vào bảng 'movie' (Khớp các cột trong SQL của bạn)
-        DB::table('movie')->insert([
-            'movie_name'    => $request->movie_name,
-            'movie_name_vn' => $request->movie_name_vn,
-            'original_name' => $request->movie_name, // Thêm cho đủ cột bắt đầu NOT NULL
-            'release_date'  => $request->release_date,
-            'overview_vn'   => $request->description, // Cột mô tả trong SQL của bạn
-            'image'         => $imageName,
-            'image_link'    => 'storage/' . $imageName,
-            'status'        => 1, // Giá trị mặc định khi thêm mới
-            'updated_at'    => now(),
-        ]);
-
-        return redirect()->route('phim.index')->with('success', 'Thêm phim thành công!');
+        try {
+            $inserted = DB::table('movie')->insert([
+                'movie_name'    => $request->movie_name,
+                'movie_name_vn' => $request->movie_name_vn,
+                'original_name' => $request->movie_name,
+                'release_date'  => $request->release_date,
+                'overview_vn'   => $request->description,
+                'image'         => $imageName,
+                'image_link'    => $imagePath,
+                'status'        => 1,
+            ]);
+            
+            if ($inserted) {
+                return redirect()->route('phim.index')->with('success', 'Thêm phim thành công!');
+            } else {
+                return back()->withErrors(['movie_name' => 'Lỗi nhập dữ liệu vào database.'])->withInput();
+            }
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Lỗi: ' . $e->getMessage()])->withInput();
+        }
     }
 }
