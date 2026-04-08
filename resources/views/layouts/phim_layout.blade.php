@@ -17,7 +17,6 @@
         padding: 20px;
     }
 
-<<<<<<< HEAD
      .navbar {
         background-color: #131212;
 
@@ -36,14 +35,14 @@
          max-width: 900px;
          margin: 0 auto;
      }
-=======
+
     /* Sidebar nền đen chữ trắng */
     .col-3 {
         background-color: #131212 !important;
         min-height: 100vh;
         padding-top: 20px;
     }
->>>>>>> 96e54bb77d1663a561766709e7dd071ed919c564
+
 
     .navbar-nav {
         width: 100%;
