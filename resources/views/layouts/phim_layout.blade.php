@@ -51,13 +51,14 @@
              <h2>Welcome.</h2>
              <p>Millions of movies, TV shows and people to discover. Explore now.</p>
 
-             <div class="input-group search-bar">
-                 <input type="text" class="form-control custom-search-input"
+             <form action="{{ url('/timkiem') }}" method="POST" class="input-group search-bar">
+                 @csrf
+                 <input type="text" name="keyword" class="form-control custom-search-input"
                      placeholder="Nhập tên phim...">
                  <div class="input-group-append">
-                     <button class="btn custom-search-btn" type="button">Tìm kiếm</button>
+                     <button class="btn custom-search-btn" type="submit">Tìm kiếm</button>
                  </div>
-             </div>
+             </form>
          </div>
      </header>
 
