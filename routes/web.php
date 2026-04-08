@@ -3,16 +3,13 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MovieAddController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ViduLayoutController;
-
-=======
 use App\Http\Controllers\MovieManagementController;
->>>>>>> 53018c37bd3d93addef5358bfc654e4720e818ec
+
 
 Route::get('/', [App\Http\Controllers\MovieController::class, 'index']);
-<<<<<<< HEAD
 Route::get('/phim', 'App\Http\Controllers\ViduLayoutController@phim')->name('phim.index');;
 Route::get('/phim/theloai/{id}', 'App\Http\Controllers\ViduLayoutController@theloai')->name('phim.theloai');
 
@@ -26,9 +23,9 @@ Route::post('/movie/store', 'App\Http\Controllers\MovieAddController@store')->na
 // Chi tiết phim 
 Route::get('/phim/chitiet/{id}', [MovieController::class, 'show'])->name('movie.show');
 
-=======
+
 //Hứa Kim Ngân
 Route::get('/quanlyphim', [MovieManagementController::class, 'index'])->name('movie.index');
 Route::get('/quanlyphim/{id}', [MovieManagementController::class, 'show'])->name('movie.show');
 Route::delete('/quanlyphim/{id}', [MovieManagementController::class, 'destroy'])->name('movie.destroy');
->>>>>>> 53018c37bd3d93addef5358bfc654e4720e818ec
+

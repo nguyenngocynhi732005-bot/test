@@ -4,6 +4,16 @@
 <head>
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
 </head>
 
 <style>
@@ -19,7 +29,6 @@
 
      .navbar {
         background-color: #131212;
-
         font-weight: bold;
     }
 
@@ -41,6 +50,7 @@
         background-color: #131212 !important;
         min-height: 100vh;
         padding-top: 20px;
+        border-radius: 10px;
     }
 
 
@@ -63,38 +73,12 @@
         text-decoration: none;
     }
 
-<<<<<<< HEAD
     /* Flex container để banner + sidebar + content thẳng hàng */
     .main-flex-container {
         display: flex;
         flex-direction: column; /* banner đứng trên */
         align-items: center;
     }
-=======
-                         @foreach($genres as $gn)
-                         <li class="nav-item">
-                             {{-- Tự động tạo link dựa trên id và hiển thị tên tiếng Việt --}}
-                             <a class="nav-link" href="{{url('phim/theloai/'.$gn->id)}}">
-                                 {{$gn->genre_name_vn}}
-                             </a>
-                         </li>
-                         @endforeach
-                     </ul>
-                 </nav>
-             </div>
-             <div class='col-9'>
-                 @yield('content')
-             </div>
-         </div>
-     </main>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
- </body>
->>>>>>> 53018c37bd3d93addef5358bfc654e4720e818ec
 
     .content-flex-row {
         display: flex;
@@ -107,6 +91,7 @@
 
     header img {
         display: block;
+        padding-bottom: 10px;
     }
 </style>
 
@@ -125,7 +110,7 @@
 
         <!-- Nội dung chính: sidebar + content -->
         <main class="content-flex-row">
-            <div class="col-3 pr-0">
+            <div class="col-3 pr-0" style="border-radius: 5px;">
                 <nav class="navbar navbar-light">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
@@ -147,6 +132,8 @@
             </div>
         </main>
     </div>
+
+    @yield('scripts')
 </body>
 
 </html>

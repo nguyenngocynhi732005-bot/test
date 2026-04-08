@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid p-0">
         <h2 class="text-center mb-4">DANH SÁCH PHIM</h2>
-        <button class="btn btn-success mb-3">Thêm</button>
+        <a href="{{ route('movies.create') }}" class="btn btn-success mb-3">Thêm</a>
         <table id="id-table" class="table table-bordered table-hover">
             <thead class="thead-light">
                 <tr class="text-center">
@@ -45,6 +45,45 @@
     </div>
 @endsection
 
+<style>
+    #id-table_wrapper .dataTables_info {
+        padding-top: 0.35rem;
+        font-size: 0.9rem;
+        color: #495057;
+    }
+
+    #id-table_wrapper .dataTables_paginate {
+        padding-top: 0.15rem;
+    }
+
+    #id-table_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.15rem 0.55rem;
+        margin-left: 2px;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        background: #fff;
+        color: #495057 !important;
+        box-shadow: none !important;
+    }
+
+    #id-table_wrapper .dataTables_paginate .paginate_button.current {
+        background: #0d6efd !important;
+        border-color: #0d6efd;
+        color: #fff !important;
+    }
+
+    #id-table_wrapper .dataTables_paginate .paginate_button:hover {
+        background: #f1f3f5 !important;
+        border-color: #ced4da;
+        color: #212529 !important;
+    }
+
+    #id-table_wrapper .dataTables_paginate .paginate_button.disabled {
+        opacity: 0.45;
+        cursor: default;
+    }
+</style>
+
 @section('scripts')
     <script>
         $(document).ready(function () {
@@ -54,13 +93,17 @@
                 lengthMenu: [5, 10, 25, 50, 100],
                 stateSave: true,
 
-                // 👇 QUAN TRỌNG: layout nằm cùng 1 dòng
-                dom: '<"d-flex justify-content-between align-items-center mb-2"l f>rtip',
+                pagingType: 'simple_numbers',
+                dom: '<"d-flex justify-content-between align-items-center mb-2"lf>rt<"d-flex justify-content-between align-items-center mt-2"ip>',
 
                 // Việt hóa (optional)
                 language: {
                     lengthMenu: "_MENU_ entries per page",
                     search: "Search:",
+                    paginate: {
+                        previous: "«",
+                        next: "»"
+                    }
                 }
             });
         });
