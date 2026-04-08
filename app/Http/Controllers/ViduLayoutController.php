@@ -3,17 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Movie; // ⭐ Dùng model để lấy đầy đủ thuộc tính
 use Illuminate\Support\Facades\DB;
+
 
 class ViduLayoutController extends Controller
 {
     public function phim()
     {
         $genres = DB::table('genre')->get();
-        $movies = DB::select("SELECT * FROM movie 
-                              WHERE popularity > 450 AND vote_average > 7 
-                              ORDER BY release_date DESC 
-                              LIMIT 12");
+
+        // ⭐ Chỉ sửa chỗ này: dùng Movie::query() để lấy tất cả cột
+        $movies = Movie::where('status', 1)
+                       ->where('popularity', '>', 450)
+                       ->where('vote_average', '>', 7)
+                       ->orderBy('release_date', 'desc')
+                       ->limit(12)
+                       ->get();
 
         return view("viduphim.index", compact("genres", "movies"));
     }
@@ -21,20 +27,28 @@ class ViduLayoutController extends Controller
     public function index()
     {
         $genres = DB::table('genre')->get();
-        // Đảm bảo lấy dữ liệu từ bảng movie 
-        $movies = DB::select("SELECT * FROM movie WHERE popularity > 450 AND vote_average > 7 ORDER BY release_date DESC LIMIT 12");
 
-        // Truyền biến 'movies' (số nhiều) sang view 
+        $movies = Movie::where('status', 1)
+                       ->where('popularity', '>', 450)
+                       ->where('vote_average', '>', 7)
+                       ->orderBy('release_date', 'desc')
+                       ->limit(12)
+                       ->get();
+
         return view('viduphim.index', compact('genres', 'movies'));
     }
+
     public function theloai($id)
     {
         $genres = DB::table('genre')->get();
-        $movies = DB::select("SELECT m.* FROM movie m
-                              INNER JOIN movie_genre mg ON m.id = mg.id_movie
-                              WHERE mg.id_genre = ?
-                              ORDER BY m.release_date DESC
-                              LIMIT 12", [$id]);
+
+        $movies = Movie::where('status', 1)
+                       ->whereHas('genres', function($q) use($id) {
+            $q->where('genre.id', $id);
+        })
+        ->orderBy('release_date', 'desc')
+        ->limit(12)
+        ->get();
 
         return view("viduphim.index", compact("genres", "movies"));
     }
